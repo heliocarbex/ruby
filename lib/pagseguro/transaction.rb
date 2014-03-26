@@ -71,9 +71,7 @@ module PagSeguro
       if PagSeguro.environment == 'development'
         path = "/notifications.php?notificationCode=#{code}" 
       end 
-
-      puts path
-
+      
       load_from_response Request.get(path)
     end
 

@@ -60,6 +60,10 @@ module PagSeguro
       production: {
         api: "https://ws.pagseguro.uol.com.br/v2",
         site: "https://pagseguro.uol.com.br/v2"
+      },
+      development: {
+        api: "http://localhost:8888/pagseguro/",
+        site: "http://localhost:8888/pagseguro/"
       }
     }
   end

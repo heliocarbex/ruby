@@ -66,7 +66,15 @@ module PagSeguro
     # Find a transaction by its notificationCode.
     # Return a PagSeguro::Transaction instance.
     def self.find_by_notification_code(code)
-      load_from_response Request.get("transactions/notifications/#{code}")
+      path = "transactions/notifications/#{code}"
+
+      if PagSeguro.environment == 'development'
+        path = "/notifications.php?notificationCode=#{code}" 
+      end 
+
+      puts path
+
+      load_from_response Request.get(path)
     end
 
     # Search transactions within a date range.
@@ -112,7 +120,7 @@ module PagSeguro
     # Serialize the HTTP response into data.
     def self.load_from_response(response) # :nodoc:
       puts response 
-      
+
       if response.success? and response.xml?
         load_from_xml Nokogiri::XML(response.body).css("transaction").first
       else

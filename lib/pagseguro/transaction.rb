@@ -111,6 +111,8 @@ module PagSeguro
 
     # Serialize the HTTP response into data.
     def self.load_from_response(response) # :nodoc:
+      puts response 
+      
       if response.success? and response.xml?
         load_from_xml Nokogiri::XML(response.body).css("transaction").first
       else
